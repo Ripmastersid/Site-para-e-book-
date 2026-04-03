@@ -3,88 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SIDMARKTING - E-books transformadores sobre comportamento humano e consumo consciente.">
     <title>SIDMARKTING | Sidnei Santos</title>
+    
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- GSAP e Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Arial,sans-serif;background:#0a0a0a;color:#fff;line-height:1.6}
-        .container{max-width:1200px;margin:0 auto;padding:20px}
-        header{padding:20px 0;border-bottom:2px solid #4169E1;text-align:center}
-        .logo{font-size:2rem;font-weight:800;color:#4169E1;letter-spacing:3px}
-        .hero{padding:60px 20px;text-align:center}
-        .hero h1{font-size:2.5rem;margin:20px 0;background:linear-gradient(135deg,#fff,#4169E1,#FF6B35);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .hero p{color:#F5F5DC;max-width:600px;margin:0 auto 30px}
-        .btn{display:inline-block;padding:15px 40px;background:linear-gradient(45deg,#FF6B35,#4169E1);color:#fff;text-decoration:none;border-radius:8px;margin:10px;font-weight:600;text-transform:uppercase}
-        .books{padding:60px 20px}
-        .books h2{text-align:center;margin-bottom:40px;color:#FF6B35}
-        .book-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
-        .book{background:#1a1a2e;padding:30px;border-radius:15px;border:1px solid #4169E1;text-align:center}
-        .book img{width:100%;max-width:250px;border-radius:10px;margin-bottom:20px}
-        .book h3{color:#fff;margin:15px 0}
-        .book .subtitle{color:#FF6B35;font-weight:600;margin:10px 0}
-        .book p{color:#aaa;margin:15px 0}
-        .book .price{color:#FF6B35;font-size:1.5rem;font-weight:700;margin:20px 0}
-        .book a{display:block;padding:12px;background:#FF6B35;color:#000;text-decoration:none;border-radius:6px;font-weight:600;margin-top:15px}
-        .contact{padding:40px 20px;text-align:center;background:#1a1a2e}
-        .contact a{color:#4169E1;text-decoration:none;margin:0 10px}
-        footer{padding:30px 20px;text-align:center;border-top:1px solid #333;color:#888;font-size:0.9rem}
-        .whatsapp-float{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;text-decoration:none;box-shadow:0 5px 20px rgba(37,211,102,0.6)}
-        @media(max-width:768px){.hero h1{font-size:2rem}.book-grid{grid-template-columns:1fr}}
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-orange: #ff0055;
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border-glow: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--bg-dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Fundo Espacial Animado */
+        #stars-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            z-index: -2;
+        }
+        #stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: moveStars 100s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        @keyframes moveStars { from {transform: translateY(0);} to {transform: translateY(-1000px);} }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: var(--border-glow);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { 
+            width: 60px; height: 60px; border-radius: 50%; background: var(--glass); 
+            display: flex; align-items: center; justify-content: center; border: 2px solid var(--neon-blue);
+            overflow: hidden;
+        }
+        .logo-area img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Hero Section & 3D */
+        .hero {
+            min-height: 80vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 50px 0;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            background: linear-gradient(to right, var(--neon-blue), #fff, var(--neon-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+        .hero p { font-size: 1.3rem; color: #aaa; max-width: 600px; margin-bottom: 40px; }
+
+        /* 3D Container */
+        #canvas-container {
+            width: 300px; height: 300px;
+            margin: 20px auto;
+            position: relative;
+        }
+        canvas { display: block; width: 100%; height: 100%; }
+
+        /* Botões RGB */
+        .btn-glow {
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-glow::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-glow:hover::before { left: 100%; }
+        .btn-glow:hover { box-shadow: 0 0 20px var(--neon-blue); background: rgba(0, 243, 255, 0.1); }
+
+        /* Placeholders Gerais */
+        .placeholder-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            color: #888; font-size: 0.9rem; text-align: center;
+            flex-direction: column;
+            margin: 20px auto;
+        }
+        .placeholder-box i { font-size: 2rem; margin-bottom: 10px; color: var(--neon-purple); }
+        .placeholder-label { margin-top: 5px; font-size: 0.7rem; opacity: 0.7; }
+
+        /* Banners */
+        .banners { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 50px 0; }
+        .banner-img { width: 100%; aspect-ratio: 16/9; border-radius: 15px; object-fit: cover; }
+
+        /* Cards Livros */
+        .books-section { padding: 80px 0; }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        
+        .book-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        /* Borda RGB Animada */
+        .book-card::after {
+            content: ''; position: absolute; inset: -2px; border-radius: 22px; padding: 2px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-orange));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0.7;
+        }
+        .book-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .book-cover-placeholder {
+            width: 100%; height: 350px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .book-cover-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .price-tag {
+            font-size: 2rem; color: var(--neon-orange); font-weight: bold; margin: 15px 0;
+            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+
+        /* Seção Autor */
+        .author-section { padding: 60px 0; text-align: center; }
+        .author-img-placeholder {
+            width: 200px; height: 200px; border-radius: 50%;
+            margin: 0 auto 30px; border: 4px solid var(--neon-purple);
+            overflow: hidden;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0; text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 50px;
+        }
+        .social-icons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        .social-icons a {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--glass); display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.5rem; transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .social-icons a:hover { background: var(--neon-blue); color: #000; transform: scale(1.1); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            #canvas-container { width: 200px; height: 200px; }
+        }
     </style>
 </head>
 <body>
-    <header><div class="container"><div class="logo">SIDMARKTING</div></div></header>
-    
+
+    <div id="stars-bg"></div>
+    <div id="stars"></div>
+
+    <header>
+        <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+            <div class="logo-area">
+                <!-- PLACEHOLDER: LOGO (200x200) -->
+                <i class="fas fa-rocket" style="color:var(--neon-blue); font-size:1.5rem;"></i>
+                <!-- Para colocar imagem real, use: <img src="logo.png"> -->
+            </div>
+            <nav>
+                <!-- Links simples para mobile -->
+                <a href="#livros" class="btn-glow" style="padding: 8px 20px; font-size: 0.8rem;">Ver E-books</a>
+            </nav>
+        </div>
+    </header>
+
     <section class="hero">
         <div class="container">
-            <h1>SIDMARKTING</h1>
-            <p>Por Sidnei Santos</p>
-            <p>E-books transformadores sobre comportamento humano e consumo consciente. Descubra quem somos quando deixamos de fingir.</p>
-            <a href="#livros" class="btn">Conheça os E-books</a>
+            <h1 class="gsap-hero">SIDMARKTING</h1>
+            <p class="gsap-hero">E-books transformadores sobre comportamento humano e consumo consciente.</p>
+            
+            <!-- 3D Container -->
+            <div id="canvas-container" class="gsap-hero"></div>
+
+            <a href="#livros" class="btn-glow gsap-hero">Começar a Jornada</a>
         </div>
     </section>
-    
-    <section class="books" id="livros">
+
+    <!-- Banners Promocionais -->
+    <section class="container">
+        <div class="banners">
+            <!-- PLACEHOLDER BANNER 1 (1280x720) -->
+            <div class="placeholder-box" style="aspect-ratio: 16/9;">
+                <i class="fas fa-image"></i>
+                <span>Banner Promocional 1</span>
+                <span class="placeholder-label">Substituir por imagem 1280x720</span>
+            </div>
+            <!-- PLACEHOLDER BANNER 2 (1280x720) -->
+            <div class="placeholder-box" style="aspect-ratio: 16/9;">
+                <i class="fas fa-image"></i>
+                <span>Banner Promocional 2</span>
+                <span class="placeholder-label">Substituir por imagem 1280x720</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Livros -->
+    <section class="books-section" id="livros">
         <div class="container">
-            <h2>E-books Disponíveis</h2>
-            <div class="book-grid">
-                <div class="book">
-                    <div style="background:#333;height:300px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#888">Capa do Livro</div>
-                    <h3>A Tragédia de Consumo</h3>
-                    <p class="subtitle">Livro 1: A Audição</p>
-                    <p>Uma jornada psicológica profunda sobre identidade, autenticidade e as máscaras que usamos.</p>
-                    <div class="price">R$ 47,90</div>
-                    <a href="https://hotmart.com/pt-br/club/sidnei-dos-santos/a-tragedia-de-consumo-livro-1-a-audicao/H105104744B" target="_blank">Comprar Agora</a>
+            <h2 style="text-align:center; font-family:'Orbitron'; font-size:2rem; margin-bottom:40px; color:var(--neon-blue);" class="gsap-title">OBRAS DISPONÍVEIS</h2>
+            
+            <div class="books-grid">
+                <!-- LIVRO 1 -->
+                <div class="book-card gsap-card">
+                    <div class="book-cover-placeholder">
+                        <!-- PLACEHOLDER: CAPA LIVRO 1 -->
+                        <div class="placeholder-box" style="width:100%; height:100%; border:none;">
+                            <i class="fas fa-book"></i>
+                            <span>Capa do Livro 1</span>
+                            <span class="placeholder-label">Substituir por imagem</span>
+                        </div>
+                    </div>
+                    <h3 style="font-family:'Orbitron'; font-size:1.5rem;">A Tragédia de Consumo</h3>
+                    <p style="color:var(--neon-orange); font-weight:bold;">Livro 1: A Audição</p>
+                    <p style="color:#aaa; margin:10px 0;">Uma jornada psicológica profunda sobre identidade e autenticidade.</p>
+                    <div class="price-tag">R$ 19,90</div>
+                    <a href="https://hotmart.com/pt-br/club/sidnei-dos-santos/a-tragedia-de-consumo-livro-1-a-audicao/H105104744B" target="_blank" class="btn-glow" style="width:100%; text-align:center;">COMPRAR AGORA</a>
                 </div>
-                <div class="book">
-                    <div style="background:#333;height:300px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#888">Capa do Livro</div>
-                    <h3>O Crisol</h3>
-                    <p class="subtitle">Livro 2: A Transformação</p>
-                    <p>7 cenas. 300 páginas. Uma jornada intensa sobre transformação pessoal e identidade.</p>
-                    <div class="price">R$ 57,90</div>
-                    <a href="https://pay.hotmart.com/V105185225J" target="_blank">Comprar Agora</a>
+
+                <!-- LIVRO 2 -->
+                <div class="book-card gsap-card">
+                    <div class="book-cover-placeholder">
+                        <!-- PLACEHOLDER: CAPA LIVRO 2 -->
+                        <div class="placeholder-box" style="width:100%; height:100%; border:none;">
+                            <i class="fas fa-book"></i>
+                            <span>Capa do Livro 2</span>
+                            <span class="placeholder-label">Substituir por imagem</span>
+                        </div>
+                    </div>
+                    <h3 style="font-family:'Orbitron'; font-size:1.5rem;">O Crisol</h3>
+                    <p style="color:var(--neon-orange); font-weight:bold;">Livro 2: A Transformação</p>
+                    <p style="color:#aaa; margin:10px 0;">7 cenas. 300 páginas. Uma jornada intensa sobre transformação pessoal.</p>
+                    <div class="price-tag">R$ 49,59</div>
+                    <a href="https://pay.hotmart.com/V105185225J" target="_blank" class="btn-glow" style="width:100%; text-align:center;">COMPRAR AGORA</a>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section class="contact">
+
+    <!-- Sobre o Autor -->
+    <section class="author-section">
         <div class="container">
-            <h2 style="margin-bottom:20px;color:#FF6B35">Contato</h2>
-            <p><a href="mailto:syd.shapper@gmail.com">✉️ syd.shapper@gmail.com</a></p>
-            <p><a href="https://wa.me/5521988663114" target="_blank">📱 (21) 98866-3114</a></p>
-            <p style="margin-top:20px">
-                <a href="https://youtube.com/@sidneidossantos.7008" target="_blank">YouTube</a> | 
-                <a href="https://instagram.com/syd.shapper" target="_blank">Instagram</a> | 
-                <a href="https://linkedin.com/in/sidnei-santos-3ab92412a" target="_blank">LinkedIn</a>
+            <h2 style="font-family:'Orbitron'; font-size:2rem; color:var(--neon-purple);" class="gsap-title">SOBRE O AUTOR</h2>
+            <div class="author-img-placeholder">
+                <!-- PLACEHOLDER: FOTO SIDNEI (1080x1080 ou 200x200) -->
+                <i class="fas fa-user-astronaut" style="font-size:4rem; color:#555; margin-top:60px;"></i>
+                <!-- Para colocar imagem real, use: <img src="foto-sidnei.jpg"> -->
+            </div>
+            <p style="max-width:700px; margin:0 auto; color:#ccc; line-height:1.8;">
+                Especialista em comportamento humano, Sidnei Santos convida você a descobrir quem somos quando deixamos de fingir.
             </p>
         </div>
     </section>
-    
+
     <footer>
-        <p>&copy; 2026 SIDMARKTING - Sidnei Santos. Todos os direitos reservados.</p>
-        <p style="margin-top:10px">sidmarkting.com.br</p>
+        <div class="container">
+            <h3 style="font-family:'Orbitron'; color:var(--neon-blue);">SIDMARKTING</h3>
+            <p style="color:#888; margin-top:10px;">sidmarkting.com.br</p>
+            
+            <div class="social-icons">
+                <!-- PLACEHOLDER: ÍCONES REDES SOCIAIS (600x600) -->
+                <a href="https://youtube.com/@sidneidossantos.7008" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/syd.shapper/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/sidnei-santos-3ab92412a" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:syd.shapper@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/5521988663114" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top:30px; font-size:0.8rem; color:#555;">&copy; 2026 Sidnei Santos. Todos os direitos reservados.</p>
+        </div>
     </footer>
-    
-    <a href="https://wa.me/5521988663114" class="whatsapp-float" target="_blank">💬</a>
+
+    <!-- Scripts (3D e Animações) -->
+    <script>
+        // 1. Configuração do Three.js (O Núcleo 3D)
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio será ajustado
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const container = document.getElementById('canvas-container');
+        
+        // Ajuste de tamanho
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        container.appendChild(renderer.domElement);
+
+        // Criar Geometria (Icosaedro futurista)
+        const geometry = new THREE.IcosahedronGeometry(1.5, 0);
+        const material = new THREE.MeshPhongMaterial({ 
+            color: 0x00f3ff, 
+            wireframe: true,
+            emissive: 0xbc13fe,
+            emissiveIntensity: 0.5
+        });
+        const core = new THREE.Mesh(geometry, material);
+        scene.add(core);
+
+        // Luzes
+        const light = new THREE.PointLight(0xffffff, 2, 100);
+        light.position.set(10, 10, 10);
+        scene.add(light);
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+
+        camera.position.z = 4;
+
+        // Animação Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            core.rotation.x += 0.005;
+            core.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Interatividade com Mouse/Toque
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / width) * 2 - 1;
+            const y = -((e.clientY - rect.top) / height) * 2 + 1;
+            gsap.to(core.rotation, { x: y * 0.5, y: x * 0.5, duration: 1 });
+        });
+
+        // 2. Animações GSAP (Scroll Trigger)
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Fade In
+        gsap.from(".gsap-hero", {
+            y: 50, opacity: 0, duration: 1.5, stagger: 0.3, ease: "power3.out"
+        });
+
+        // Títulos
+        gsap.utils.toArray('.gsap-title').forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: { trigger: title, start: "top 80%" },
+                x: -50, opacity: 0, duration: 1
+            });
+        });
+
+        // Cards dos Livros
+        gsap.utils.toArray('.gsap-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: { trigger: card, start: "top 85%" },
+                y: 100, opacity: 0, duration: 1, delay: i * 0.2
+            });
+        });
+
+        // Ajuste responsivo do 3D
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            renderer.setSize(w, h);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        });
+    </script>
 </body>
 </html>
