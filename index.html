@@ -38,14 +38,21 @@
         /* Botões */
         .btn-glow { padding: 15px 35px; background: transparent; border: 2px solid var(--neon-blue); color: #fff; font-family: 'Orbitron', sans-serif; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; transition: 0.3s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
         .btn-glow:hover { box-shadow: 0 0 25px var(--neon-blue); background: rgba(0, 243, 255, 0.1); }
-        
-        /* BOTÃO LARANJA DE COMPRA */
         .btn-buy { background: var(--neon-orange) !important; border: 2px solid var(--neon-orange) !important; color: #000 !important; box-shadow: 0 0 20px rgba(255, 107, 53, 0.4); }
         .btn-buy:hover { box-shadow: 0 0 35px rgba(255, 107, 53, 0.8) !important; background: #ff8555 !important; transform: translateY(-3px); }
         
         /* Placeholders */
-        .placeholder-box { background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(255, 255, 255, 0.2); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #888; flex-direction: column; width: 100%; }
-        .placeholder-box i { font-size: 2rem; margin-bottom: 10px; color: var(--neon-purple); }
+        .placeholder-box { background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(255, 255, 255, 0.2); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: #888; flex-direction: column; width: 100%; min-height: 150px; }
+        .placeholder-box i { font-size: 2.5rem; margin-bottom: 15px; color: var(--neon-purple); }
+        .placeholder-label { margin-top: 8px; font-size: 0.75rem; opacity: 0.7; }
+        
+        /* Banners 1280x720 */
+        .banners { display: grid; grid-template-columns: 1fr; gap: 25px; margin: 50px 0; width: 100%; }
+        .banner-placeholder { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; background: rgba(255,255,255,0.03); border: 2px dashed rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-direction: column; transition: 0.3s; }
+        .banner-placeholder:hover { border-color: var(--neon-blue); box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); }
+        .banner-placeholder i { font-size: 3.5rem; color: var(--neon-blue); margin-bottom: 15px; }
+        .banner-placeholder span { font-size: 1.1rem; color: #aaa; font-family: 'Orbitron', sans-serif; }
+        @media(min-width: 768px) { .banners { grid-template-columns: repeat(2, 1fr); } }
         
         /* Cards Livros com BORDA RGB ANIMADA */
         .books-section { padding: 60px 0; }
@@ -54,7 +61,6 @@
         .book-card {
             background: var(--glass); border-radius: 20px; padding: 25px; position: relative; transition: 0.3s;
             backdrop-filter: blur(5px); display: flex; flex-direction: column;
-            /* Borda RGB Animada */
             border: 2px solid transparent;
             background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
                         linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-orange), var(--neon-blue)) border-box;
@@ -62,7 +68,6 @@
             animation: borderFlow 4s linear infinite;
         }
         
-        /* Animação da Borda RGB */
         @keyframes borderFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -116,12 +121,28 @@
         </div>
     </section>
     
+    <!-- BANNERS 1280x720 -->
+    <section class="container">
+        <div class="banners">
+            <div class="banner-placeholder">
+                <i class="fas fa-image"></i>
+                <span>Banner Promocional 1</span>
+                <span class="placeholder-label">1280x720 - Substituir por imagem</span>
+            </div>
+            <div class="banner-placeholder">
+                <i class="fas fa-image"></i>
+                <span>Banner Promocional 2</span>
+                <span class="placeholder-label">1280x720 - Substituir por imagem</span>
+            </div>
+        </div>
+    </section>
+    
     <section class="books-section" id="livros">
         <div class="container">
             <h2 style="text-align:center; font-family:'Orbitron'; font-size:2rem; margin-bottom:40px; color:var(--neon-blue);" class="gsap-title">OBRAS DISPONÍVEIS</h2>
             <div class="books-grid">
                 
-                <!-- LIVRO 1 - LINK ENCURTADO + BOTÃO LARANJA -->
+                <!-- LIVRO 1 -->
                 <div class="book-card gsap-card">
                     <div class="book-cover-placeholder placeholder-box" style="border:none; background:#0a0a0a;">
                         <i class="fas fa-book"></i><span>Capa Livro 1</span>
@@ -133,7 +154,7 @@
                     <a href="https://acesse.one/rf1l15x" target="_blank" rel="noopener noreferrer" class="btn-glow btn-buy btn-buy-full">COMPRAR AGORA</a>
                 </div>
                 
-                <!-- LIVRO 2 - LINK ENCURTADO + BOTÃO LARANJA -->
+                <!-- LIVRO 2 -->
                 <div class="book-card gsap-card">
                     <div class="book-cover-placeholder placeholder-box" style="border:none; background:#0a0a0a;">
                         <i class="fas fa-book"></i><span>Capa Livro 2</span>
