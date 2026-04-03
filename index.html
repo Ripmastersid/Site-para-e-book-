@@ -1,5 +1,3 @@
-
-    
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,12 +6,10 @@
     <meta name="description" content="SIDMARKTING - E-books sobre marketing de rede e consumo consciente.">
     <title>SIDMARKTING | Sidnei Santos</title>
     
-    <!-- Fontes e Ícones -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- GSAP e Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -22,10 +18,9 @@
         :root {
             --neon-blue: #00f3ff;
             --neon-purple: #bc13fe;
-            --neon-orange: #ff0055;
+            --neon-orange: #FF6B35;
             --bg-dark: #050505;
             --glass: rgba(255, 255, 255, 0.05);
-            --border-glow: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Fundo Espacial Animado */
         #stars-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
@@ -57,15 +51,13 @@
         }
         @keyframes moveStars { from {transform: translateY(0);} to {transform: translateY(-1000px);} }
 
-        /* Container */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
 
-        /* Header */
         header {
             padding: 15px 0;
             display: flex; justify-content: space-between; align-items: center;
             backdrop-filter: blur(10px);
-            border-bottom: var(--border-glow);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             position: sticky; top: 0; z-index: 100;
         }
         .logo-area { 
@@ -74,7 +66,6 @@
             overflow: hidden; font-family: 'Orbitron'; font-weight: 900; color: var(--neon-blue);
         }
 
-        /* Hero Section & 3D */
         .hero {
             min-height: 90vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -89,14 +80,14 @@
         }
         .hero p { font-size: 1.2rem; color: #ccc; max-width: 700px; margin-bottom: 30px; line-height: 1.6; }
 
-        /* 3D Container - AUMENTADO */
+        /* 3D MUITO MAIOR */
         #canvas-container {
-            width: 80vw; height: 80vw; max-width: 450px; max-height: 450px;
+            width: 95vw; height: 95vw; max-width: 600px; max-height: 600px;
             margin: 20px auto 40px; position: relative;
         }
         canvas { display: block; width: 100%; height: 100%; }
 
-        /* Botões RGB */
+        /* Botões */
         .btn-glow {
             padding: 15px 35px; background: transparent; border: 2px solid var(--neon-blue);
             color: #fff; font-family: 'Orbitron', sans-serif; font-weight: bold;
@@ -112,7 +103,19 @@
         .btn-glow:hover::before { left: 100%; }
         .btn-glow:hover { box-shadow: 0 0 25px var(--neon-blue); background: rgba(0, 243, 255, 0.1); }
 
-        /* Placeholders */
+        /* BOTÃO LARANJA DE COMPRA */
+        .btn-buy {
+            background: var(--neon-orange) !important;
+            border: 2px solid var(--neon-orange) !important;
+            color: #000 !important;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+        }
+        .btn-buy:hover {
+            box-shadow: 0 0 35px rgba(255, 107, 53, 0.8) !important;
+            background: #ff8555 !important;
+            transform: translateY(-3px);
+        }
+
         .placeholder-box {
             background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(255, 255, 255, 0.2);
             border-radius: 15px; display: flex; align-items: center; justify-content: center;
@@ -122,13 +125,10 @@
         .placeholder-box i { font-size: 2rem; margin-bottom: 10px; color: var(--neon-purple); }
         .placeholder-label { margin-top: 5px; font-size: 0.7rem; opacity: 0.7; }
 
-        /* Banners - AJUSTADO PARA MOBILE */
         .banners { display: grid; grid-template-columns: 1fr; gap: 20px; margin: 40px 0; width: 100%; }
         .banner-placeholder { width: 100%; aspect-ratio: 16/9; border-radius: 15px; overflow: hidden; }
-        .banner-placeholder img { width: 100%; height: 100%; object-fit: cover; }
         @media(min-width: 768px) { .banners { grid-template-columns: repeat(2, 1fr); } }
 
-        /* Cards Livros */
         .books-section { padding: 60px 0; }
         .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
         
@@ -146,17 +146,83 @@
         .book-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
         .book-cover-placeholder { width: 100%; aspect-ratio: 3/4; border-radius: 10px; margin-bottom: 20px; overflow: hidden; background: #111; }
-        .book-cover-placeholder img { width: 100%; height: 100%; object-fit: cover; }
         
-        .price-tag { font-size: 2.2rem; color: var(--neon-orange); font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px rgba(255, 0, 85, 0.5); }
-        .btn-buy { width: 100%; text-align: center; margin-top: auto; font-size: 1.1rem; }
+        .price-tag { font-size: 2.2rem; color: var(--neon-orange); font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px rgba(255, 107, 53, 0.6); }
+        .btn-buy-full { width: 100%; text-align: center; margin-top: auto; font-size: 1.1rem; }
 
-        /* Seção Autor */
+        /* Formulário de Opiniões */
+        .feedback-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(188, 19, 254, 0.1) 50%, transparent 100%);
+        }
+        .feedback-form {
+            max-width: 700px;
+            margin: 40px auto 0;
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+        .form-group { margin-bottom: 25px; }
+        .form-group label {
+            display: block;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .optional-tag {
+            color: #666;
+            font-size: 0.8rem;
+            margin-left: 5px;
+            font-style: italic;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--neon-purple);
+            border: none;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-submit:hover {
+            background: #d44fff;
+            box-shadow: 0 0 25px rgba(188, 19, 254, 0.6);
+            transform: translateY(-2px);
+        }
+
         .author-section { padding: 60px 0; text-align: center; }
         .author-img-placeholder { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto 30px; border: 4px solid var(--neon-purple); overflow: hidden; background: #111; }
-        .author-img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Footer */
         footer { padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; }
         .social-icons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
         .social-icons a {
@@ -166,11 +232,10 @@
         }
         .social-icons a:hover { background: var(--neon-blue); color: #000; transform: scale(1.1); }
 
-        /* Mobile */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
-            #canvas-container { width: 90vw; height: 90vw; }
-            .btn-glow { padding: 12px 25px; font-size: 0.8rem; }
+            #canvas-container { width: 95vw; height: 95vw; }
+            .feedback-form { padding: 25px; }
         }
     </style>
 </head>
@@ -189,9 +254,7 @@
     <section class="hero">
         <div class="container">
             <h1 class="gsap-hero">SIDMARKTING</h1>
-            <!-- ATUALIZADO: Biografia correta -->
             <p class="gsap-hero">Especialista em Marketing de Rede. Descubra quem somos quando deixamos de fingir.</p>
-            
             <div id="canvas-container" class="gsap-hero"></div>
             <a href="#livros" class="btn-glow gsap-hero">Começar a Jornada</a>
         </div>
@@ -202,12 +265,12 @@
             <div class="placeholder-box banner-placeholder">
                 <i class="fas fa-image"></i>
                 <span>Banner Promocional 1</span>
-                <span class="placeholder-label">Ideal: 1280x720 (aparece grande no celular)</span>
+                <span class="placeholder-label">1280x720</span>
             </div>
             <div class="placeholder-box banner-placeholder">
                 <i class="fas fa-image"></i>
                 <span>Banner Promocional 2</span>
-                <span class="placeholder-label">Ideal: 1280x720 (aparece grande no celular)</span>
+                <span class="placeholder-label">1280x720</span>
             </div>
         </div>
     </section>
@@ -222,14 +285,12 @@
                     <div class="book-cover-placeholder placeholder-box" style="border:none; background:#0a0a0a;">
                         <i class="fas fa-book"></i>
                         <span>Capa Livro 1</span>
-                        <span class="placeholder-label">Substituir por imagem</span>
                     </div>
                     <h3 style="font-family:'Orbitron'; font-size:1.5rem;">A Tragédia de Consumo</h3>
                     <p style="color:var(--neon-orange); font-weight:bold;">Livro 1: A Audição</p>
                     <p style="color:#aaa; margin:10px 0; flex-grow:1;">Uma jornada psicológica profunda sobre identidade e autenticidade.</p>
                     <div class="price-tag">R$ 19,90</div>
-                    <!-- LINK HOTMART 1 GARANTIDO -->
-                    <a href="https://hotmart.com/pt-br/club/sidnei-dos-santos/a-tragedia-de-consumo-livro-1-a-audicao/H105104744B" target="_blank" class="btn-glow btn-buy">COMPRAR AGORA</a>
+                    <a href="https://sidvix.com.br/sejam-bem-vindos?fbclid=IwdGRjcAQ8x8BjbGNrBDzHlmV4dG4DYWVtAjExAHNydGMGYXBwX2lkDDM1MDY4NTUzMTcyOAABHt5MGEB2MEpl5rym1_1zd672umyskBwZFIsXQwOAomJIAB5Qkhb-4NfBFppa_aem_ysUnilNrhgSAhqMy6mYPoQ" target="_blank" class="btn-glow btn-buy btn-buy-full">COMPRAR AGORA</a>
                 </div>
 
                 <!-- LIVRO 2 -->
@@ -237,16 +298,38 @@
                     <div class="book-cover-placeholder placeholder-box" style="border:none; background:#0a0a0a;">
                         <i class="fas fa-book"></i>
                         <span>Capa Livro 2</span>
-                        <span class="placeholder-label">Substituir por imagem</span>
                     </div>
                     <h3 style="font-family:'Orbitron'; font-size:1.5rem;">O Crisol</h3>
                     <p style="color:var(--neon-orange); font-weight:bold;">Livro 2: A Transformação</p>
                     <p style="color:#aaa; margin:10px 0; flex-grow:1;">7 cenas. 300 páginas. Uma jornada intensa sobre transformação pessoal.</p>
                     <div class="price-tag">R$ 49,59</div>
-                    <!-- LINK HOTMART 2 GARANTIDO -->
-                    <a href="https://pay.hotmart.com/V105185225J" target="_blank" class="btn-glow btn-buy">COMPRAR AGORA</a>
+                    <a href="https://pay.hotmart.com/V105185225J?bid=1775232883992" target="_blank" class="btn-glow btn-buy btn-buy-full">COMPRAR AGORA</a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Opiniões -->
+    <section class="feedback-section">
+        <div class="container">
+            <h2 style="text-align:center; font-family:'Orbitron'; font-size:2rem; color:var(--neon-purple);" class="gsap-title">DEIXE SUA OPINIÃO</h2>
+            <p style="text-align:center; color:#aaa; margin-top:10px;">Sua opinião é importante para nós!</p>
+            
+            <form class="feedback-form gsap-card" onsubmit="event.preventDefault(); alert('Obrigado pelo seu feedback!');">
+                <div class="form-group">
+                    <label>Nome <span class="optional-tag">(opcional)</span></label>
+                    <input type="text" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label>Email <span class="optional-tag">(opcional)</span></label>
+                    <input type="email" placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Sua Opinião <span class="optional-tag">(opcional)</span></label>
+                    <textarea placeholder="Conte-nos o que achou dos e-books..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Opinião</button>
+            </form>
         </div>
     </section>
 
@@ -255,7 +338,6 @@
             <h2 style="font-family:'Orbitron'; font-size:2rem; color:var(--neon-purple);" class="gsap-title">SOBRE O AUTOR</h2>
             <div class="author-img-placeholder placeholder-box" style="border:none; background:#0a0a0a;">
                 <i class="fas fa-user-astronaut" style="font-size:4rem; color:#555; margin-top:50px;"></i>
-                <span style="margin-top:10px;">Foto Sidnei</span>
             </div>
             <p style="max-width:700px; margin:0 auto; color:#ccc; line-height:1.8;">
                 Especialista em Marketing de Rede, Sidnei Santos convida você a descobrir quem somos quando deixamos de fingir.
@@ -269,11 +351,12 @@
             <p style="color:#888; margin-top:10px;">sidmarkting.com.br</p>
             
             <div class="social-icons">
-                <a href="https://youtube.com/@sidneidossantos.7008" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.instagram.com/syd.shapper/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/sidnei-santos-3ab92412a" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:syd.shapper@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://wa.me/5521988663114" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://youtube.com/@sidneidossantos.7008?si=pPUoPeQLLQN7hS0m" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/share/1DYrwWtA6M/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/syd.shapper/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/sidnei-santos-3ab92412a" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://wa.me/5521988663114" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:syd.shapper@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
             <p style="margin-top:30px; font-size:0.8rem; color:#555;">&copy; 2026 Sidnei Santos. Todos os direitos reservados.</p>
         </div>
@@ -293,7 +376,7 @@
         camera.updateProjectionMatrix();
         container.appendChild(renderer.domElement);
 
-        const geometry = new THREE.IcosahedronGeometry(1.5, 0);
+        const geometry = new THREE.IcosahedronGeometry(2, 0); // Aumentado de 1.5 para 2
         const material = new THREE.MeshPhongMaterial({ color: 0x00f3ff, wireframe: true, emissive: 0xbc13fe, emissiveIntensity: 0.5 });
         const core = new THREE.Mesh(geometry, material);
         scene.add(core);
@@ -340,4 +423,4 @@
         });
     </script>
 </body>
-</html>    
+    </html>
