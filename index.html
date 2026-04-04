@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
     <style>
         :root { --neon-blue: #00f3ff; --neon-purple: #bc13fe; --neon-orange: #FF6B35; --bg-dark: #050505; --glass: rgba(255, 255, 255, 0.05); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +26,7 @@
         .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 0; }
         .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem); background: linear-gradient(to right, var(--neon-blue), #fff, var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
         .hero p { font-size: 1.2rem; color: #ccc; max-width: 700px; margin-bottom: 30px; line-height: 1.6; }
-        #canvas-container { width: 95vw; height: 95vw; max-width: 600px; max-height: 600px; margin: 20px auto 40px; position: relative; }
+        #canvas-container { width: 95vw; height: 95vw; max-width: 600px; max-height: 600px; margin: 20px auto 40px; position: relative; background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%); border-radius: 20px; }
         #canvas-container canvas { display: block; width: 100%; height: 100%; }
         .btn-glow { padding: 15px 35px; background: transparent; border: 2px solid var(--neon-blue); color: #fff; font-family: 'Orbitron', sans-serif; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; transition: 0.3s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
         .btn-glow:hover { box-shadow: 0 0 25px var(--neon-blue); background: rgba(0, 243, 255, 0.1); }
@@ -73,7 +74,7 @@
 <body>
     <div id="stars-bg"></div><div id="stars"></div>
     <header><div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-        <div class="logo-area"><img src="./baixar.gif" alt="Logo SIDMARKTING" onerror="this.style.display='none'"></div>
+        <div class="logo-area"><img src="./baixar.gif" alt="Logo SIDMARKTING"></div>
         <a href="#livros" class="btn-glow" style="padding: 8px 18px; font-size: 0.7rem;">VER E-BOOKS</a>
     </div></header>
     <section class="hero"><div class="container">
@@ -83,14 +84,14 @@
         <a href="#livros" class="btn-glow gsap-hero">Começar a Jornada</a>
     </div></section>
     <section class="container"><div class="banners">
-        <div class="banner-img"><img src="./DOIS%20LIVROS%20156%20P%C3%81GINAS%20DE%20TRANSFORMA%C3%87%C3%83O.png" alt="Banner 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221280%22 height=%22720%22%3E%3Crect fill=%22%23333%22 width=%221280%22 height=%22720%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22%3EBanner 1%3C/text%3E%3C/svg%3E'"></div>
-        <div class="banner-img"><img src="./Bannersite.png" alt="Banner 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221280%22 height=%22720%22%3E%3Crect fill=%22%23333%22 width=%221280%22 height=%22720%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22%3EBanner 2%3C/text%3E%3C/svg%3E'"></div>
+        <div class="banner-img"><img src="./DOIS%20LIVROS%20156%20P%C3%81GINAS%20DE%20TRANSFORMA%C3%87%C3%83O.png" alt="Banner 1"></div>
+        <div class="banner-img"><img src="./Bannersite.png" alt="Banner 2"></div>
     </div></section>
     <section class="books-section" id="livros"><div class="container">
         <h2 style="text-align:center; font-family:'Orbitron'; font-size:2rem; margin-bottom:40px; color:var(--neon-blue);" class="gsap-title">OBRAS DISPONÍVEIS</h2>
         <div class="books-grid">
             <div class="book-card gsap-card">
-                <div class="book-cover"><img src="./Em%20PDF%20(1).png" alt="Capa Livro 1" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#222;display:flex;align-items:center;justify-content:center;color:#666;\'>Capa Livro 1</div>'"></div>
+                <div class="book-cover"><img src="./Em%20PDF%20(1).png" alt="Capa Livro 1"></div>
                 <h3 style="font-family:'Orbitron'; font-size:1.5rem;">A Tragédia de Consumo</h3>
                 <p style="color:var(--neon-orange); font-weight:bold;">Livro 1: A Audição</p>
                 <p style="color:#aaa; margin:10px 0; flex-grow:1;">40 páginas de jornada psicológica profunda sobre identidade e autenticidade.</p>
@@ -98,7 +99,7 @@
                 <a href="https://acesse.one/rf1l15x" target="_blank" rel="noopener noreferrer" class="btn-glow btn-buy btn-buy-full">COMPRAR AGORA</a>
             </div>
             <div class="book-card gsap-card">
-                <div class="book-cover"><img src="./Em%20PDF.png" alt="Capa Livro 2" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#222;display:flex;align-items:center;justify-content:center;color:#666;\'>Capa Livro 2</div>'"></div>
+                <div class="book-cover"><img src="./Em%20PDF.png" alt="Capa Livro 2"></div>
                 <h3 style="font-family:'Orbitron'; font-size:1.5rem;">O Crisol</h3>
                 <p style="color:var(--neon-orange); font-weight:bold;">Livro 2: A Transformação</p>
                 <p style="color:#aaa; margin:10px 0; flex-grow:1;">7 cenas. 116 páginas. Uma jornada intensa sobre transformação pessoal e identidade.</p>
@@ -121,12 +122,12 @@
     </div></section>
     <section class="author-section"><div class="container">
         <h2 style="font-family:'Orbitron'; font-size:2rem; color:var(--neon-purple);" class="gsap-title">SOBRE O AUTOR</h2>
-        <div class="author-img"><img src="./baixar.gif" alt="Sidnei Santos" onerror="this.style.background='#333'"></div>
+        <div class="author-img"><img src="./baixar.gif" alt="Sidnei Santos"></div>
         <p style="max-width:700px; margin:0 auto; color:#ccc; line-height:1.8;">Especialista em Marketing de Rede, Sidnei Santos convida você a descobrir quem somos quando deixamos de fingir.</p>
     </div></section>
     <footer><div class="container"><h3 style="font-family:'Orbitron'; color:var(--neon-blue);">SIDMARKTING</h3><p style="color:#888; margin-top:10px;">sidmarkting.com.br</p><div class="social-icons"><a href="https://youtube.com/@sidneidossantos.7008?si=pPUoPeQLLQN7hS0m" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a><a href="https://www.facebook.com/share/1DYrwWtA6M/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/syd.shapper/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a><a href="https://www.linkedin.com/in/sidnei-santos-3ab92412a" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/5521988663114" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a><a href="mailto:syd.shapper@gmail.com"><i class="fas fa-envelope"></i></a></div><p style="margin-top:30px; font-size:0.8rem; color:#555;">&copy; 2026 Sidnei Santos. Todos os direitos reservados.</p></div></footer>
     <script>
-        // Three.js com GLTFLoader
+        // Three.js com DRACOLoader
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -140,27 +141,39 @@
         camera.updateProjectionMatrix();
         container.appendChild(renderer.domElement);
 
-        // Luzes
-        const light = new THREE.PointLight(0xffffff, 2, 100);
-        light.position.set(10, 10, 10);
-        scene.add(light);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
-        // Carregar modelo 3D
-        const loader = new THREE.GLTFLoader();
-        const modelUrl = './pessoa-lendo-livro-v2.glb';
+        // ILUMINAÇÃO PROFISSIONAL
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+        directionalLight1.position.set(5, 5, 5);
+        const directionalLight2 = new THREE.DirectionalLight(0x00f3ff, 0.6);
+        directionalLight2.position.set(-5, 3, 5);
+        const pointLight = new THREE.PointLight(0xbc13fe, 0.8, 100);
+        pointLight.position.set(0, 5, 0);
         
-        console.log('Carregando 3D de:', modelUrl);
+        scene.add(ambientLight);
+        scene.add(directionalLight1);
+        scene.add(directionalLight2);
+        scene.add(pointLight);
+
+        // DRACOLoader
+        const dracoLoader = new THREE.DRACOLoader();
+        dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+        dracoLoader.setDecoderConfig({ type: 'js' });
+
+        // GLTFLoader com DRACOLoader
+        const loader = new THREE.GLTFLoader();
+        loader.setDRACOLoader(dracoLoader);
+
+        const modelUrl = './pessoa-lendo-livro-v2.glb';
         
         loader.load(
             modelUrl,
-            function(gltf) {
+            (gltf) => {
                 const model = gltf.scene;
                 model.scale.set(1.8, 1.8, 1.8);
                 model.position.set(0, 0, 0);
                 scene.add(model);
-                console.log('✅ 3D carregado com sucesso!');
-
+                
                 function animate() {
                     requestAnimationFrame(animate);
                     model.rotation.y += 0.003;
@@ -171,15 +184,15 @@
                 container.addEventListener('mousemove', (e) => {
                     const rect = container.getBoundingClientRect();
                     const x = ((e.clientX - rect.left) / width) * 2 - 1;
-                    model.rotation.y = x * 0.5;
+                    model.rotation.y += x * 0.01;
                 });
             },
-            function(xhr) {
+            (xhr) => {
                 console.log((xhr.loaded / xhr.total * 100) + '% carregado');
             },
-            function(error) {
-                console.error('❌ Erro ao carregar 3D:', error);
-                container.innerHTML = '<div style="color:#fff;text-align:center;padding:50px;"><i class="fas fa-cube" style="font-size:3rem;color:#666;"></i><p style="margin-top:20px;color:#999;">Carregando 3D...</p></div>';
+            (error) => {
+                console.error('Erro ao carregar 3D:', error);
+                container.innerHTML = '<div style="color:#888;text-align:center;padding:50px;"><i class="fas fa-cube" style="font-size:3rem;"></i><p style="margin-top:20px;">Carregando 3D...</p></div>';
             }
         );
 
